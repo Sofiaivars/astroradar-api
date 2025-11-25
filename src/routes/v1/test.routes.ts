@@ -1,4 +1,4 @@
-import { TestController } from "@/src/controllers/test.controller";
+import { TestController } from "@/src/controllers/v1/test.controller";
 import { Router } from "express";
 
 export class TestRoutes {
