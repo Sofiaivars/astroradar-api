@@ -8,6 +8,9 @@
     "allowJs": true, // Permitir archivos .js
     "esModuleInterop": true, // Habilitar la interoperabilidad de módulos
     "isolatedModules": true, // Habilitar la comprobación de módulos independientes
+    "paths": {
+      "@/*": ["./*"]
+    }
 	},
   "include": ["src/**/*"], // Incluir archivos en la compilación
   "exclude": ["node_modules", "dist"] // Excluir archivos de la compilación
