@@ -2,7 +2,7 @@
   "name": "astroradar-api",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "app.mjs",
   "type": "module",
   "exports": "./dist/app.mjs",
   "scripts": {
