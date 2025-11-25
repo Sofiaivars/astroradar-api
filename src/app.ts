@@ -1,6 +1,6 @@
 import { envs } from "@/src/config/envs";
 import { Server } from "@/src/config/server";
-import { AppRoutes } from "@/src/routes/v1/routes";
+import { AppRoutes } from "@/src/routes/v1";
 
 
 (async () => {
@@ -12,4 +12,6 @@ function main() {
     port: envs.PORT,
     routes: AppRoutes.routes,
   });
+
+  server.start();
 }
