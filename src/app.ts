@@ -1,5 +1,5 @@
-import { envs } from "./config/envs";
-import { Server } from "./config/server";
+import { envs } from "@/src/config/envs";
+import { Server } from "@/src/config/server";
 
 
 (async () => {
