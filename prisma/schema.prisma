@@ -12,3 +12,74 @@ generator client {
 datasource db {
   provider = "postgresql"
 }
+
+model User {
+  id        String @id @default(uuid())
+  name      String
+  lastname  String
+  username  String @unique
+  password  String 
+  image     String
+  email     String @unique
+  city      String
+  country   String
+  rol       String
+  is_active Boolean
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user_bases    Base[]
+  user_missions UserMission[]
+
+  @@map("user")
+}
+
+model Base {
+  id        String @id @default(uuid())
+  user_id   String
+  base      String
+  latitude  String
+  longitude String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  bases_user    User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  base_missions UserMission[]
+
+  @@map("base")
+}
+
+model Event {
+  id         String @id @default(uuid())
+  event      String
+  category   String
+  start_date DateTime
+  end_date   DateTime
+  moon       String
+  visibility String
+  image      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  event_missions UserMission[]
+
+  @@map("event")
+}
+
+model UserMission{
+  id        String @id @default(uuid())
+  user_id   String
+  base_id   String?
+  event_id  String
+  state     String
+  image     String?
+  done_date DateTime?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  missions_user  User  @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  missions_base  Base? @relation(fields: [base_id], references: [id], onDelete: Cascade)
+  missions_event Event @relation(fields: [event_id], references: [id], onDelete: Cascade)
+
+  @@map("user_mission")
+}
