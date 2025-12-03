@@ -1,6 +1,6 @@
-import { envs } from "@/src/config/envs";
-import { Server } from "@/src/config/server";
-import { AppRoutes } from "@/src/routes/v1";
+import { envs } from "@config/envs";
+import { Server } from "@config/server";
+import { AppRoutes } from "@routes/v1";
 
 
 (async () => {

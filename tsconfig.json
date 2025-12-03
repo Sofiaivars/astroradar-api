@@ -9,7 +9,13 @@
     "esModuleInterop": true, // Habilitar la interoperabilidad de módulos
     "isolatedModules": true, // Habilitar la comprobación de módulos independientes
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@controllers/*": ["./src/controllers/*"],
+      "@routes/*": ["./src/routes/*"],
+      "@services/*": ["./src/services/*"],
+      "@middlewares/*": ["./src/middlewares/*"],
+      "@utils/*": ["./src/utils/*"],
+      "@config/*": ["./src/config/*"],
     }
 	},
   "include": ["src/**/*"], // Incluir archivos en la compilación

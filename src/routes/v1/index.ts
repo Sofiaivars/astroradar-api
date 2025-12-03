@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { AuthRoutes } from "./auth.routes";
+import { AuthRoutes } from "@routes/v1/auth.routes";
 
 export class AppRoutes {
 
