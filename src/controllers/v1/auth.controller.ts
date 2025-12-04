@@ -6,10 +6,6 @@ import { envs } from "@config/envs";
 
 export class AuthController {
 
-  public hi(req: Request, res: Response) {
-    res.status(200).json({hello: 'world'});
-  }
-
   public async login(req: Request, res: Response) {
     const { email, password } = req.body;
 
