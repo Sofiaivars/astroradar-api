@@ -1,5 +1,7 @@
 import { prisma } from "@/config/prisma";
 import { Request, Response } from "express";
+import bcrypt from 'bcrypt';
+import { envs } from "@/config/envs";
 
 export class AuthController {
 
@@ -46,12 +48,14 @@ export class AuthController {
         !city || 
         !country
       ) throw new Error("Faltan datos");
+
+      const hashedPassword = bcrypt.hashSync(password, envs.SALT_ROUNDS);
       
       const newUser = {
         name: name,
         lastname: lastName,
         username: username,
-        password: password,
+        password: hashedPassword,
         image: image,
         email: email,
         city: city,
