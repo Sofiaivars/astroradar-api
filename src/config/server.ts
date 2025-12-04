@@ -1,5 +1,6 @@
 import express, { Router } from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 interface Options {
   port: number;
@@ -24,6 +25,7 @@ export class Server {
     // Middlewares
     this.app.use(cors());
     this.app.use(express.json());
+    this.app.use(cookieParser());
 
     // Routes
     this.app.use(this.routes);
