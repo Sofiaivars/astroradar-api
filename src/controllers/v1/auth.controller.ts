@@ -9,13 +9,22 @@ export class AuthController {
     res.status(200).json({hello: 'world'});
   }
 
-  public login(req: Request, res: Response) {
+  public async login(req: Request, res: Response) {
     const { email, password } = req.body;
 
     try {
       
-      res.status(200).json({email, password});
-      console.log({email, password});
+      const user = await prisma.user.findUnique({
+        where: {
+          email: email
+        }
+      });
+      if(!user) return res.status(404).json(`El email: ${email} no se encuentra registrado`);
+
+      const isValid = bcrypt.compareSync(password, user.password);
+      if(!isValid) return res.status(401).json("Contraseña fallida");
+
+      res.status(200).json(user);
 
     } catch (error) {
       
