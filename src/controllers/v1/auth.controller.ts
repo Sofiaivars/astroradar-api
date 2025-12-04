@@ -1,3 +1,4 @@
+import { prisma } from "@/config/prisma";
 import { Request, Response } from "express";
 
 export class AuthController {
@@ -46,8 +47,31 @@ export class AuthController {
         !country
       ) throw new Error("Faltan datos");
       
-      res.status(200).json({username, email, city, country});
-      console.log({name, lastName, username, email, password, image, city, country});
+      const newUser = {
+        name: name,
+        lastname: lastName,
+        username: username,
+        password: password,
+        image: image,
+        email: email,
+        city: city,
+        country: country,
+        rol: "user",
+        is_active: false
+      }
+      
+      const existingUser = await prisma.user.findFirst({
+        where: {
+          OR: [
+            { username: username },
+            { email: email }
+          ]
+        }
+      });
+      if(existingUser) return res.status(400).json("El nombre de usuario o email ya están registrados");
+
+      await prisma.user.create({ data: newUser });
+      res.status(200).json(`Usuario: ${username} creado con éxito!`);
 
     } catch (error) {
       
