@@ -1,8 +1,8 @@
-import { prisma } from "@/config/prisma";
+import { prisma } from "@config/prisma";
 import { Request, Response } from "express";
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-import { envs } from "@/config/envs";
+import { envs } from "@config/envs";
 
 export class AuthController {
 
@@ -32,7 +32,15 @@ export class AuthController {
         }
       );
 
-      res.status(200).json(user);
+      res
+        .cookie('access_token', token, {
+          httpOnly: true,
+          secure: envs.NODE_ENV === 'production',
+          sameSite: 'strict',
+          maxAge: 1000 * 60 * 60,
+        })
+        .status(200)
+        .json(`Usuario: ${user.username} ha iniciado sesión`);
 
     } catch (error) {
       
