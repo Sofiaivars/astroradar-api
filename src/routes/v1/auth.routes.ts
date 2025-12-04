@@ -9,8 +9,8 @@ export class AuthRoutes {
     const authController = new AuthController();
 
     router.get('/hi', authController.hi);
-    router.get('/login', authController.hi);
-    router.get('/signup', authController.hi);
+    router.post('/login', authController.login);
+    router.post('/signup', authController.signup);
 
     return router;
   }
