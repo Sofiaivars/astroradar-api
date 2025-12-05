@@ -129,8 +129,8 @@ async function main(){
       data: {
         event: e.evento,
         category: e.tipo,
-        start_date: e.fecha_inicio,
-        end_date: e.fecha_fin,
+        start_date: new Date(e.fecha_inicio),
+        end_date: new Date (e.fecha_fin),
         moon: e.fase_lunar,
         visibility: e.visibilidad,
         image: e.tipo === "lluvia de meteoros" 
