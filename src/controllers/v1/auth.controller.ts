@@ -36,7 +36,20 @@ export class AuthController {
           maxAge: 1000 * 60 * 60,
         })
         .status(200)
-        .json(`Usuario: ${user.username} ha iniciado sesión`);
+        .json(
+          {
+            name: user.name,
+            lastName: user.lastname,
+            username: user.username,
+            image: user.image,
+            email: user.email,
+            city: user.city,
+            country: user.country,
+            rol: user.rol,
+            isActive: user.is_active,
+            createdAt: user.createdAt,
+          }
+        );
 
     } catch (error) {
       
