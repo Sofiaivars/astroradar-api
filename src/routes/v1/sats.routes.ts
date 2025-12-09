@@ -8,7 +8,7 @@ export class SatsRoutes {
     const satsController = new SatsController();
 
     router.post('/above', satsController.above);
-    router.get('/iss', satsController.above);
+    router.post('/iss', satsController.iss);
 
     return router;
   }
