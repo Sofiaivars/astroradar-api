@@ -119,4 +119,36 @@ export class AuthController {
       
   }
 
+  public async profile(req: Request, res: Response){
+    try {
+      const userEmail = req.user?.email;
+      if(!userEmail)throw new Error("Datos no disponibles");
+
+      const userData = await prisma.user.findFirst({
+        where:{
+          email: userEmail
+        }
+      });
+      if(!userData)throw new Error(`No se encontró al usuario con email: ${userEmail}`);
+
+      return res.status(200).json({
+        id: userData.id, 
+        name: userData.name, 
+        lastname: userData.lastname,
+        username: userData.username,
+        image: userData.image,
+        email: userData.email,
+        city: userData.city,
+        country: userData.country,
+        rol: userData.rol,
+        isActive: userData.is_active,
+        createdAt: userData.createdAt,
+      });
+    } catch (error) {
+      
+      console.error(error);
+      return res.status(500).json({ message: "Error interno del servidor" });
+
+    }
+  }
 }
