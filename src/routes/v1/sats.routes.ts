@@ -1,4 +1,4 @@
-import { SatsController } from "@/controllers/v1/sats.controller";
+import { SatsController } from "@controllers/v1/sats.controller";
 import { Router } from "express";
 
 export class SatsRoutes {

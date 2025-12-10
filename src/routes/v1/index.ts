@@ -2,7 +2,7 @@ import { Router } from "express";
 import { HelloRoutes } from "@routes/v1/hello.routes";
 import { AuthRoutes } from "@routes/v1/auth.routes";
 import { EventsRoutes } from "@routes/v1/events.routes";
-import { SatsRoutes } from "./sats.routes";
+import { SatsRoutes } from "@routes/v1/sats.routes";
 
 export class AppRoutes {
 
