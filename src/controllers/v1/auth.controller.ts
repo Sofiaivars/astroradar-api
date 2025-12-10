@@ -61,7 +61,7 @@ export class AuthController {
   public async signup(req: Request, res: Response) {
     const {
       name, 
-      lastName, 
+      lastname, 
       username, 
       email, 
       password, 
@@ -74,7 +74,7 @@ export class AuthController {
       
       if(
         !name || 
-        !lastName || 
+        !lastname || 
         !username || 
         !email || 
         !password || 
@@ -87,7 +87,7 @@ export class AuthController {
       
       const newUser = {
         name: name,
-        lastname: lastName,
+        lastname: lastname,
         username: username,
         password: hashedPassword,
         image: image,
