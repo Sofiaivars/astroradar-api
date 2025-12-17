@@ -11,6 +11,16 @@ export class MissionsController {
 
     try {
       
+      const missionExists = await prisma.userMission.findFirst({
+        where: {
+          user_id: userId,
+          event_id: eventId
+        }
+      });
+      if(missionExists){
+        return res.status(409).json({ message: "Ya has guardado esta misión"});
+      }
+
       await prisma.userMission.create({
         data: {
           user_id: userId,
@@ -18,7 +28,7 @@ export class MissionsController {
           state,
         }
       });
-      res.status(200).json({message: `Misión guardada con éxito`});
+      res.status(201).json({message: `Misión guardada con éxito`});
 
     } catch (error: any) {
       console.error(error);
