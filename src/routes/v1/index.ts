@@ -3,6 +3,7 @@ import { HelloRoutes } from "@routes/v1/hello.routes";
 import { AuthRoutes } from "@routes/v1/auth.routes";
 import { EventsRoutes } from "@routes/v1/events.routes";
 import { SatsRoutes } from "@routes/v1/sats.routes";
+import { MissionsRoutes } from "@routes/v1/missions.routes";
 
 export class AppRoutes {
 
@@ -14,6 +15,7 @@ export class AppRoutes {
     router.use('/api/v1/auth', AuthRoutes.routes);
     router.use('/api/v1/events', EventsRoutes.routes);
     router.use('/api/v1/sats', SatsRoutes.routes);
+    router.use('/api/v1/missions', MissionsRoutes.routes);
 
     return router;
   }
