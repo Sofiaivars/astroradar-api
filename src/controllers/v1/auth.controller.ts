@@ -38,6 +38,7 @@ export class AuthController {
         .status(200)
         .json(
           {
+            id: user.id,
             name: user.name,
             lastName: user.lastname,
             username: user.username,
