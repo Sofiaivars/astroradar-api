@@ -4,13 +4,62 @@ import { Request, Response } from 'express';
 export class MissionsController {
 
   public async getMissionsById(req: Request, res: Response){
-    
+    const { id } = req.params;
+    if(!id) return res.status(400).json({ message: "Faltan datos obligatorios"});
+
+    try {
+      
+      const missions = await prisma.userMission.findMany({
+        where: { user_id: id, },
+        include: {
+          missions_event: {
+            select: {
+              event: true,
+              category: true,
+              start_date: true,
+              end_date: true,
+              moon: true,
+              visibility: true,
+              image: true,
+            }
+          },
+          missions_base: true,
+        }
+      });
+      if(missions.length === 0) return res.status(200).json({ 
+        message: "No hay misiones programadas",
+        missions: [],
+        count: 0
+      });
+
+      res.status(200).json({
+        missions,
+        count: missions.length,
+      });
+      return;
+
+    } catch (error: any) {
+      
+      console.error("Error al buscar misiones:", error);
+      
+      // Validación de UUID inválido en Prisma
+      if (error.code === 'P2023') {
+        return res.status(400).json({ 
+          message: "Formato de ID inválido" 
+        });
+      }
+
+      return res.status(500).json({ 
+        message: "Error al obtener las misiones" 
+      });
+
+    }
   }
 
   public async addMission(req: Request, res: Response){
     const { userId, eventId, state } = req.body;
     if(!userId || !eventId || !state){
-      return res.status(400).json({message: "Missing data"});
+      return res.status(400).json({message: "Faltan datos obligatorios"});
     }
 
     try {
