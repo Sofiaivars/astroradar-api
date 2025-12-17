@@ -6,7 +6,7 @@ export class MissionsRoutes {
     const router = Router();
     const missionsController = new MissionsController();
 
-    router.get('/:id', );
+    router.get('/:id', missionsController.getMissionsById);
     router.post('/add', missionsController.addMission);
 
     return router;

@@ -3,6 +3,10 @@ import { Request, Response } from 'express';
 
 export class MissionsController {
 
+  public async getMissionsById(req: Request, res: Response){
+    
+  }
+
   public async addMission(req: Request, res: Response){
     const { userId, eventId, state } = req.body;
     if(!userId || !eventId || !state){
